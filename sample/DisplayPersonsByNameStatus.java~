@@ -101,7 +101,7 @@ public class DisplayPersonsByNameStatus extends ConsoleStatus {
                     next_disp_id = selectedList.size();
                 }
             }
-	}
+	    }
     }
 
 	// 次の状態に遷移することを促すためのメッセージの表示

@@ -1,30 +1,29 @@
-/* DisplayPersonsByNameStatus.java
+/* DisplayPersonsByTypeStatus.java
  */
 
-/* DisplayPersonsByNameStatus
+/* DisplayPersonsByTypeStatus
  */
-public class DisplayPersonsByNameStatus extends ConsoleStatus {
+public class DisplayPersonsByTypeStatus extends ConsoleStatus {
 
 	// フィールド
-	private String name;
+	private String work;
 	private PersonList plist;
 	private PersonList selectedList;
 	private DisplayPersonStatus next;
-    private int next_disp_id = 0;
 
 	/**
-	 * コンストラクタ DisplayPersonsByNameStatus
+	 * コンストラクタ DisplayPersonsByTypeStatus
 	 * @param String firstMess
 	 * @param String promptMess
 	 * @param boolean IsEndStatus
 	 * @param PersonList plist
 	 * @param DisplayPersonStatus next
 	 */
-	DisplayPersonsByNameStatus( String firstMess, String promptMess,
+	DisplayPersonsByTypeStatus( String firstMess, String promptMess,
 	                     boolean IsEndStatus,
 	                     PersonList plist, DisplayPersonStatus next ) {
 		super( firstMess, promptMess, IsEndStatus );
-		this.name = "";
+		this.work = "";
 		this.plist = plist;
 		this.selectedList = null;
 		this.next = next;
@@ -35,19 +34,18 @@ public class DisplayPersonsByNameStatus extends ConsoleStatus {
 	 * @throws Exception
 	 */
 	public void displayFirstMess() throws Exception {
-		displayList(" ");
+		displayList();
 		super.displayFirstMess();
 	}
 
-	// 検索する氏名を登録する
-	/** setName
-	 * @param String name
+	/** setWork
+	 * @param String work
 	 */
-	public void setName( String name ) {
-		this.name = name;
+	public void setWork( String work ) {
+		this.work = work;
 	}
 
-	// 入力された氏名の文字列を氏名に含む従業員のレコードだけを
+	// 入力された職種をもつ従業員のレコードだけを
 	// 取り出す処理
 	/**
 	 * displayList
@@ -55,7 +53,7 @@ public class DisplayPersonsByNameStatus extends ConsoleStatus {
 	public void displayList(String code) {
 		// 入力された氏名に一致または氏名を含む従業員のレコードだけを
 		// selectedListに取り出す
-		selectedList = plist.searchByName( name );
+		selectedList = plist.searchByName( work );
 		// selectedListの件数＝0ならば当該職種をもつ
 		// 従業員はいないと表示
 
@@ -110,26 +108,20 @@ public class DisplayPersonsByNameStatus extends ConsoleStatus {
 	 * @return ConsoleStatus
 	 */
 	public ConsoleStatus getNextStatus( String s ) {
-        if (s.equals("N") || s.equals("P")) {
-            // N -> 次の3件、P -> 前の3件
-            displayList(s);
-            return this;
-        } else {
-            // 数値が入力された場合，その数値と同じIDをもつ
-            // レコードがselectedListにあるかどうか判定し，
-            // あればそれを次の状態DisplayPersonStatusに渡す
-            try {
-                int i = Integer.parseInt( s );
-                Person p = selectedList.get( i );
-                if( p == null )
-                    return this;
-                else {
-                    next.setPersonRecord( p );
-                    return next;
-                }
-            } catch( NumberFormatException e ) {
-                return super.getNextStatus( s );
-            }
-        }
+		// 数値が入力された場合，その数値と同じIDをもつ
+		// レコードがselectedListにあるかどうか判定し，
+		// あればそれを次の状態DisplayPersonStatusに渡す
+		try {
+			int i = Integer.parseInt( s );
+			Person p = selectedList.get( i );
+			if( p == null )
+				return this;
+			else {
+				next.setPersonRecord( p );
+				return next;
+			}
+		} catch( NumberFormatException e ) {
+			return super.getNextStatus( s );
+		}
 	}
 }
