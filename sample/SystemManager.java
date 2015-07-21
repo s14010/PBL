@@ -27,8 +27,8 @@ public class SystemManager {
 	private AddWorkStatus sts11;
 	private DeleteWorkStatus sts12;
 	private ExitStatus sts13;
-    private AddClientStatus sts14; //CI/CU
-    private UpdateClientStatus sts15; //CI/CU
+    private AddClientStatus sts14; // CI/CU
+    private UpdateClientStatus sts15; // CI/CU 
 
 	public static void main( String[] args ) {
 		try {
@@ -70,7 +70,7 @@ public class SystemManager {
 		    "                メニュー\n" +
 		    "  従業員検索(S)\n" +
 		    "  従業員管理(JI：追加 JU：更新 JD：削除)\n" +
-            "  顧客管理(CI: 追加 CU: 更新)\n" + //CI/CU
+		    "  顧客管理(CI：追加 CU：更新)\n" + // CI/CU
 		    "  稼働状況管理(KI：追加 KD：削除)\n" +
 		    "  終了(X)\n" +
 		    "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/\n",
@@ -103,7 +103,7 @@ public class SystemManager {
 		// 職種から得た従業者リストを表示し，従業員IDを入力する状態
 		sts4 = new DisplayPersonsByTypeStatus(
 		    "",
-            "P->前の3件 N->次の3件\n" +
+		    "p->前の3件　N->次の３件\n" + 
 		    "E->検索結果一覧終了（検索条件指定に戻る）[(従業員ID),P,N,E]>",
 		    false,
 		    plist,
@@ -121,7 +121,7 @@ public class SystemManager {
 		// 氏名から得た従業者リストを表示し，従業員IDを入力する状態
 		sts7 = new DisplayPersonsByNameStatus(
 		    "",
-            "P->前の3件 N->次の3件\n" +
+		    "p->前の3件　N->次の３件\n" + 
 		    "E->検索結果一覧終了（検索条件指定に戻る）[(従業員ID),P,N,E]>",
 		    false,
 		    plist,
@@ -183,7 +183,7 @@ public class SystemManager {
 		    true
 		 );
 
-        //--v CI/CU
+        // --v CI/CU
 		// 顧客を追加する状態
 		sts14 = new AddClientStatus(
 		    "",
@@ -199,8 +199,7 @@ public class SystemManager {
 		    false,
 		    clist
 		 );
-        //--^ CI/CU
-
+        // --^ CI/CU
 
 		sts1.setNextStatus( "S", sts2 );
 		sts1.setNextStatus( "JI", sts8 );
@@ -210,8 +209,8 @@ public class SystemManager {
 		sts1.setNextStatus( "KD", sts12 );
 		sts1.setNextStatus( "X", sts13 );
 
-        sts1.setNextStatus( "CI", sts14 ); //CI/CU
-        sts1.setNextStatus( "CU", sts15 ); //CI/CU
+        sts1.setNextStatus( "CI", sts14 ); // CI/CU
+        sts1.setNextStatus( "CU", sts15 ); // CI/CU
 
 		sts2.setNextStatus( "N", sts6 );
 		sts2.setNextStatus( "T", sts3 );
@@ -234,9 +233,9 @@ public class SystemManager {
 
 		sts12.setNextStatus( " ", sts1 );
 
-        sts14.setNextStatus( " ", sts1 ); //CI/CU
+		sts14.setNextStatus( " ", sts1 ); // CI/CU
 
-        sts15.setNextStatus( " ", sts1 ); //CI/CU
+		sts15.setNextStatus( " ", sts1 ); // CI/CU
 	}
 
 	// システムの起動
