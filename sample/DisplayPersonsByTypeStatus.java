@@ -58,7 +58,7 @@ public class DisplayPersonsByTypeStatus extends ConsoleStatus {
 		// 入力された氏名に一致または氏名を含む従業員のレコードだけを
 		// selectedListに取り出す
 		if(next_start_id == 0){
-			selectedList = plist.searchByName( work );
+			selectedList = plist.searchByTypes( work );
 			listsize = selectedList.size();
 		}
 		// selectedListの件数＝0ならば当該職種をもつ
